@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "bledtgbot"
+version = "0.0.1"
+description = "A useful bot for bled programming  telegram chat"
+authors = []
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiogram = "^3.10.0"
+python-dotenv = "^1.0.1"
+deep-translator = "^1.11.4"
+randfacts = "^0.21.0"
+openai = "^1.37.0"
+pydub = "^0.25.1"
+aiohttp = "^3.9.5"
+ujson = "^5.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
