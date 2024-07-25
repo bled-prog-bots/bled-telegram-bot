@@ -1,0 +1,21 @@
+services:
+    bot:
+        build:
+            dockerfile: Dockerfile
+        restart: always
+        stop_signal: SIGINT
+        environment:
+            - BLED_CHAT_ID
+            - BOT_TOKEN
+            - OPENAPI_MODEL
+            - OPENAI_API_KEY
+            - OPENAI_CHAT_CONTEXT
+            - SQLITE_DATABASE_FILEPATH
+            - SQLITE_DATABASE_FILENAME
+            - LOGGING_LOG_LEVEL
+            - LOGGING_FORMAT
+        depends_on:
+            - redis-stack
+    redis-stack:
+        image: redis/redis-stack-server:7.4.0-rc2
+        restart: always
