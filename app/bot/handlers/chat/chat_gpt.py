@@ -5,6 +5,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from aiogram.enums import ParseMode
 
+from app.utils import telegram_markdown_escaping
 from app.lib.chatpt import ChatGptAPI, GPTError, GPTResponse
 
 router = Router(name='chat gpt command router')
@@ -35,8 +36,11 @@ async def chat_gpt_command(msg: Message, chat_gpt: 'ChatGptAPI') -> ...:
     gpt_response: GPTError | GPTResponse = await chat_gpt.make_request(gpt_prompt)
 
     if isinstance(gpt_response, GPTResponse):
+        gpt_msg = gpt_response.choices[0].message.content
+        gpt_msg_secure = telegram_markdown_escaping(gpt_msg)
+        print(gpt_msg_secure)
         return await loading_placeholder.edit_text(
-            gpt_response.choices[0].message.content,
+            gpt_msg_secure,
             parse_mode=ParseMode.MARKDOWN
         )
 
