@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "disable_existing_loggers": 0,
+    "formatters": {
+        "default": {
+            "format": "%(asctime)s | %(levelname)s | %(filename)s:%(funcName)s:%(lineno)d | %(message)s"
+        },
+        "celery": {
+            "format": "%(asctime)s | %(levelname)s | [%(celery_parent_id)s-%(celery_current_id)s] | %(filename)s:%(funcName)s:%(lineno)d | %(message)s"
+        }
+    },
+    "handlers": {
+        "stdout": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+            "stream": "ext://sys.stderr"
+        }
+    },
+    "loggers": {
+        "celery": {"handlers": ["stdout"], "propagate": false, "level": "INFO"},
+        "celery.app.trace": {"handlers": ["stdout"], "propagate": false, "level": "INFO"},
+        "": {"handlers": ["stdout"], "propagate": false, "level": "DEBUG"}
+    }
+}
