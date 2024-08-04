@@ -1,21 +1,25 @@
-import typing
+from typing import TYPE_CHECKING
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
+from pydantic import SecretStr
 
 from app.bot import handlers
-from app.lib.wiki_api import WikiAPI
-from app.lib.chatpt import ChatGptAPI
 
-if typing.TYPE_CHECKING:
-    from app.config import Config
+if TYPE_CHECKING:
+    from app.libs.wiki_api import WikiAPI
+    from app.libs.chatgpt import ChatGptAPI
 
 
-async def start(config: 'Config') -> None:
+async def start(
+        bot_token: SecretStr,
+        wiki_api_instance: 'WikiAPI',
+        chat_gpt_instance: 'ChatGptAPI'
+) -> None:
     bot = Bot(
-        token=config.bot.token,
+        token=bot_token.get_secret_value(),
         default=DefaultBotProperties(
             parse_mode=ParseMode.HTML,
             link_preview_is_disabled=True
@@ -26,12 +30,8 @@ async def start(config: 'Config') -> None:
 
     dp.include_router(handlers.root_router)
 
-    dp['wiki_api'] = WikiAPI()
-    dp['chat_gpt'] = ChatGptAPI(
-        config.chat_gpt.model,
-        config.chat_gpt.token,
-        config.chat_gpt.chat_context
-    )
+    dp['wiki_api'] = wiki_api_instance
+    dp['chat_gpt'] = chat_gpt_instance
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)

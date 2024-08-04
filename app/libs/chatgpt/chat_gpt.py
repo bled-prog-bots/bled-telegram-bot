@@ -9,7 +9,7 @@ from .types import (
     Message,
     Usage
 )
-from app.lib.http import AiohttpClient
+from app.libs.http import AiohttpClient
 
 
 class NagaChatGptAPI(ABCChatGptAPI):

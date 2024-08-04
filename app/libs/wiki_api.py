@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 import ujson
 
-from app.lib.http import AiohttpClient
+from app.libs.http import AiohttpClient
 
 
 @dataclass

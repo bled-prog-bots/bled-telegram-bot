@@ -16,6 +16,7 @@ openai = "^1.37.0"
 pydub = "^0.25.1"
 aiohttp = "^3.9.5"
 ujson = "^5.10.0"
+pydantic-settings = "^2.4.0"
 
 
 [build-system]

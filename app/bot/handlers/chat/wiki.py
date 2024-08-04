@@ -5,7 +5,7 @@ from aiogram.types import Message
 from aiogram.filters import Command
 
 if TYPE_CHECKING:
-    from app.lib.wiki_api import WikiAPI, WikiArticleResponse
+    from app.libs.wiki_api import WikiAPI, WikiArticleResponse
 
 router = Router(name='wiki command router')
 

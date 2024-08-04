@@ -6,7 +6,7 @@ from aiogram.filters import Command
 from aiogram.enums import ParseMode
 
 from app.utils import telegram_markdown_escaping
-from app.lib.chatpt import ChatGptAPI, GPTError, GPTResponse
+from app.libs.chatgpt import ChatGptAPI, GPTError, GPTResponse
 
 router = Router(name='chat gpt command router')
 

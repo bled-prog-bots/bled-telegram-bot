@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from app import config, logging_config, bot
+from app import config, logger_config, bot
 
 
 async def main():
